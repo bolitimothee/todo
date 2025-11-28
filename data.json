@@ -1,0 +1,16 @@
+{
+  "companies": [],
+  "users": [
+    {
+      "id": "e76ec55c-e711-462e-a073-1553cf6ae180",
+      "username": "admin",
+      "password": "$2a$08$yvpwuOKeHoLRBBX4XIAWheVdPCufeqiwtDa3RZ3Mnh57jskd695/W",
+      "role": "admin",
+      "company_id": null,
+      "team_name": null,
+      "valid_until": null
+    }
+  ],
+  "tasks": [],
+  "incidents": []
+}

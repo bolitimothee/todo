@@ -1,0 +1,511 @@
+.admin-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* AdminDashboard.css
+ * Styles pour l'interface d'administration : gestion des sociétés et des utilisateurs.
+ */
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section {
+  background-color: #fff;
+  border-radius: 6px;
+  border: 1px solid #e1e4e8;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 18px;
+  color: #2c3e50;
+  margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trash-section {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #e1e4e8;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.trash-title {
+  font-size: 24px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e1e4e8;
+}
+
+.trash-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.trash-table th {
+  background-color: #f8f9fa;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #2c3e50;
+  border-bottom: 2px solid #e1e4e8;
+}
+
+.trash-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.trash-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.restore-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.restore-form input {
+  padding: 8px;
+  border: 1px solid #e1e4e8;
+  border-radius: 4px;
+  min-width: 200px;
+}
+
+.empty-trash {
+  padding: 40px;
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+  background: #f8f9fa;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.company-card {
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.company-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.company-info {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .admin-container { padding: 16px; }
+  .admin-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .company-info { flex-direction: column; gap: 12px; }
+  .restore-form input { min-width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .admin-container { padding: 12px; margin: 0.5rem; }
+  .admin-title { font-size: 1.25rem; }
+  .section { padding: 12px; }
+}
+
+@media (max-width: 420px) {
+  .company-info { flex-direction: column; gap: 8px; }
+  .company-card { padding: 12px; }
+  .trash-table, .trash-container { font-size: 0.9rem; }
+  .trash-actions { flex-direction: column; gap: 8px; }
+}
+
+.button {
+  padding: 8px 16px;
+  background: var(--primary-gradient);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-button);
+  position: relative;
+  transform: translateZ(0);
+  will-change: transform, box-shadow;
+}
+
+.button:hover {
+  transform: var(--button-hover-transform);
+  box-shadow: var(--button-shadow-hover);
+  background: var(--primary-light);
+}
+
+.button.danger {
+  background: var(--error-color);
+  color: #ffffff;
+}
+
+.button.danger:hover {
+  background: var(--error-dark);
+}
+
+/* Si le bouton 'Annuler' est rendu avec une classe secondaire, forçons son style rouge ici.
+   On utilise une règle spécifique à l'admin pour garantir l'intention UX (Annuler = danger). */
+.admin-container .button.cancel,
+.admin-container .button.secondary.cancel,
+.admin-container .button[aria-label*="annul" i],
+.admin-container .button[title*="Annul" i] {
+  background: var(--error-color) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: var(--shadow-button) !important;
+}
+
+.admin-container .button.cancel:hover,
+.admin-container .button.secondary.cancel:hover,
+.admin-container .button[aria-label*="annul" i]:hover,
+.admin-container .button[title*="Annul" i]:hover {
+  background: var(--error-dark) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.button.secondary {
+  /* Secondary buttons should also be solid blue, not transparent */
+  background: var(--primary-gradient);
+  color: #ffffff;
+  border: none;
+}
+
+.button.secondary:hover {
+  background: var(--primary-light);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 420px;
+}
+
+/* Ensure date/time inputs are visible and usable on small screens (iOS Safari) */
+.form input[type="date"],
+.form input[type="time"] {
+  min-width: 140px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .form input[type="date"], .form input[type="time"] {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+.input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.th {
+  background-color: #f8f9fa;
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+  color: #2c3e50;
+  border-bottom: 2px solid #ddd;
+}
+
+.td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.message {
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.message.success {
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d6e9c6;
+}
+
+.message.error {
+  background-color: #f2dede;
+  color: #a94442;
+  border: 1px solid #ebccd1;
+}
+
+/* Section styles */
+.section-divider {
+  height: 2px;
+  background: linear-gradient(to right, #e1e4e8, transparent);
+  margin: 40px 0;
+}
+
+.section {
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #e1e4e8;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e1e4e8;
+}
+
+.badge {
+  background: var(--primary-color);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Trash styles */
+.trash-section {
+  background-color: #fff;
+  border: 1px solid #e1e4e8;
+}
+
+.trash-container {
+  background: #fff;
+  border-radius: 4px;
+}
+
+.trash-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.trash-table th {
+  background-color: #f8f9fa;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #2c3e50;
+  border-bottom: 2px solid #e1e4e8;
+}
+
+.trash-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.trash-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.restore-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.restore-form input {
+  padding: 8px;
+  border: 1px solid #e1e4e8;
+  border-radius: 4px;
+  min-width: 200px;
+}
+
+.empty-trash {
+  padding: 40px;
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+  background: #f8f9fa;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+/* Animation de suppression */
+.trash-table tr.deleting {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; transform: translateX(-10px); }
+}
+
+/* Styles de la corbeille */
+.trash-container {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.trash-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.trash-table th {
+  background: #f8f9fa;
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #2c3e50;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.trash-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.trash-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.restore-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.restore-form input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-width: 200px;
+}
+
+.empty-trash {
+  padding: 24px;
+  text-align: center;
+  color: #6c757d;
+}
+
+/* Animation de suppression */
+.trash-table tr.deleting {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; transform: translateX(-10px); }
+}
+
+/* Styles pour la corbeille */
+.trash-table {
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-top: 16px;
+}
+
+.trash-table th,
+.trash-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.trash-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+}
+
+.restore-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.restore-form input {
+  padding: 6px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-width: 200px;
+}
+
+.trash-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Animation de suppression */
+.trash-table tr.deleting {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; transform: translateX(-10px); }
+}

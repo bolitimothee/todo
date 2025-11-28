@@ -1,0 +1,22 @@
+{
+  "name": "TO DO LIST PRO",
+  "short_name": "TO DO PRO",
+  "description": "Application de gestion de tâches et signalements",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#051937",
+  "theme_color": "#0b3d91",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icons/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icons/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

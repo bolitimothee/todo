@@ -1,0 +1,130 @@
+.team-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.team-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.team-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.task-buttons {
+  display: flex;
+
+/* TeamDashboard.css
+ * Styles pour l'affichage des tâches d'équipe (badges, boutons, empty state)
+ */
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .team-container { padding: 16px; }
+  .team-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .task-buttons { gap: 6px; }
+}
+
+@media (max-width: 600px) {
+  .team-container { padding: 12px; margin: 0.5rem; }
+  .team-title { font-size: 1.1rem; }
+  .priority-badge, .status-badge { font-size: 0.75rem; }
+}
+
+@media (max-width: 420px) {
+  .task-buttons { flex-direction: column; gap: 6px; }
+  .task-button { width: 100%; justify-content: center; }
+}
+
+.task-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.task-button.in-progress {
+  background: var(--primary-color);
+  color: #ffffff;
+  box-shadow: var(--shadow-button);
+}
+
+.task-button.in-progress:hover {
+  background: var(--primary-light);
+}
+
+.task-button.completed {
+  background-color: #27ae60;
+  color: white;
+}
+
+.task-button.completed:hover {
+  background-color: #219a52;
+}
+
+.task-button.waiting {
+  background-color: #f1c40f;
+  color: #2c3e50;
+}
+
+.task-button.waiting:hover {
+  background-color: #f39c12;
+}
+
+.task-button.incident {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.task-button.incident:hover {
+  background-color: #c0392b;
+}
+
+.priority-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.priority-badge.urgent { background: #fff2f0; color: #e74c3c; }
+.priority-badge.important { background: #fff7e6; color: #f39c12; }
+.priority-badge.normal { background: #f6ffed; color: #27ae60; }
+
+.status-badge { display:inline-flex; align-items:center; padding:0.25rem 0.6rem; border-radius:999px; font-weight:600; font-size:0.85rem; }
+.status-badge.en-cours { background:#e6f7ff; color:var(--primary-color); }
+.status-badge.effectuée { background:#f6ffed; color:var(--success-color); }
+.status-badge.en-attente { background:#fff7e6; color:var(--warning-color); }
+.status-badge.incident { background:#fff2f0; color:var(--error-color); }
+
+.team-badge { display:inline-block; padding:0.25rem 0.5rem; border-radius:6px; background:#f3f6fa; font-size:0.9rem; color:var(--text-color); }
+
+.empty-state { display:flex; flex-direction:column; align-items:center; gap:0.5rem; padding:2rem; color:#7f8c8d; }
+.empty-icon { font-size:2rem; color:var(--primary-color); }
+
+.team-icon { color: var(--primary-color); }

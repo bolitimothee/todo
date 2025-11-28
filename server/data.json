@@ -1,0 +1,134 @@
+{
+  "deletedUsers": [
+    {
+      "id": "2866e48a-e864-4017-97ac-aacd81705489",
+      "username": "jojo",
+      "password": "$2a$08$I1A753lGKEROBhlOnVOzCex0wg88bwFA7rgyccTJVcPv.I37N/X1e",
+      "role": "team",
+      "company_id": "09cda13f-4891-4f0f-9a8e-941670dbfa04",
+      "team_name": "plombiers",
+      "valid_until": "2025-11-06T01:20",
+      "created_at": "2025-11-06T01:18:54.466Z",
+      "deletedAt": "2025-11-06T01:20:02.931Z"
+    }
+  ],
+  "companies": [
+    {
+      "id": "09cda13f-4891-4f0f-9a8e-941670dbfa04",
+      "name": "timito",
+      "numTeams": 1,
+      "teams": [
+        "plombiers"
+      ],
+      "numManagers": "1",
+      "updated_at": "2025-11-05T16:43:34.019Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "a9a83700-f479-403f-92d8-38999bb9e53c",
+      "username": "admin",
+      "password": "$2a$08$iFQwChKcyl77kWBfrKZH0.oe/n4LpYUmcOqEhLgdsckHbU.oAsGCK",
+      "role": "admin",
+      "company_id": null,
+      "team_name": null,
+      "valid_until": null
+    },
+    {
+      "id": "test-user-1",
+      "username": "testuser",
+      "password": "$2a$08$nxymcWHEYEUxh9cGs7Z66e2LJTltQ1k5IEFtm1JHK3F.jhtWHJ4gy",
+      "role": "team",
+      "company_id": "09cda13f-4891-4f0f-9a8e-941670dbfa04",
+      "team_name": "plombiers",
+      "valid_until": "2025-11-06T00:01",
+      "created_at": "2025-11-06T00:00:00.000Z"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "28a4f1df-a07f-429e-ab77-18aa8277b9ec",
+      "title": "faire les joints",
+      "description": "",
+      "priority": "urgentes",
+      "status": "incident",
+      "company_id": "09cda13f-4891-4f0f-9a8e-941670dbfa04",
+      "team_name": "plombiers",
+      "created_at": "2025-11-03T22:07:53.404Z",
+      "updated_at": "2025-11-04T16:30:32.959Z"
+    },
+    {
+      "id": "aee5d77c-7b28-4ce1-9075-1c266c6c6ee9",
+      "title": "voir les wc 5eme etage",
+      "description": "",
+      "priority": "prioritaires",
+      "status": "en cours",
+      "company_id": "09cda13f-4891-4f0f-9a8e-941670dbfa04",
+      "team_name": "plombiers",
+      "created_at": "2025-11-04T02:02:10.592Z",
+      "updated_at": "2025-11-04T16:39:50.741Z"
+    },
+    {
+      "id": "5a4da1d6-89d0-4f6b-b8b7-67dc37a1dcb2",
+      "title": "fuite au 4eme",
+      "description": "",
+      "priority": "faisables",
+      "status": "effectuée",
+      "company_id": "09cda13f-4891-4f0f-9a8e-941670dbfa04",
+      "team_name": "plombiers",
+      "created_at": "2025-11-04T02:02:34.923Z",
+      "updated_at": "2025-11-04T02:34:16.832Z"
+    },
+    {
+      "id": "61831586-96be-42c2-aa30-2f1eaa4af2c8",
+      "title": "eau ne part pas au 7eme",
+      "description": "",
+      "priority": "très importantes",
+      "status": "effectuée",
+      "company_id": "09cda13f-4891-4f0f-9a8e-941670dbfa04",
+      "team_name": "plombiers",
+      "created_at": "2025-11-04T02:03:05.372Z",
+      "updated_at": "2025-11-04T02:06:13.607Z"
+    },
+    {
+      "id": "2236a3c4-4717-4169-8e21-d1ca284b39da",
+      "title": "fuite au 2me",
+      "description": "",
+      "priority": "prioritaires",
+      "status": "en cours",
+      "company_id": "09cda13f-4891-4f0f-9a8e-941670dbfa04",
+      "team_name": "plombiers",
+      "created_at": "2025-11-04T02:33:54.141Z",
+      "updated_at": "2025-11-04T02:34:18.360Z"
+    },
+    {
+      "id": "a5272625-69b0-48bf-9c24-cfc2641a4f05",
+      "title": "faire les joints de tuyauterie au 1er 2eme et 3 eme aussi revoir les canalisation des sous sols",
+      "description": "",
+      "priority": "très importantes",
+      "status": "en attente",
+      "company_id": "09cda13f-4891-4f0f-9a8e-941670dbfa04",
+      "team_name": "plombiers",
+      "created_at": "2025-11-04T16:50:16.902Z",
+      "updated_at": "2025-11-04T16:50:54.526Z"
+    }
+  ],
+  "incidents": [
+    {
+      "id": "24f70e01-2eac-44a4-b69a-1c36958014b0",
+      "task_id": "28a4f1df-a07f-429e-ab77-18aa8277b9ec",
+      "company_id": "09cda13f-4891-4f0f-9a8e-941670dbfa04",
+      "team_name": "plombiers",
+      "message": "manque de tuyau",
+      "created_at": "2025-11-03T22:10:02.869Z"
+    },
+    {
+      "id": "a40ae3ec-567f-435a-be75-3b7c18ca8f05",
+      "task_id": "28a4f1df-a07f-429e-ab77-18aa8277b9ec",
+      "company_id": "09cda13f-4891-4f0f-9a8e-941670dbfa04",
+      "team_name": "plombiers",
+      "message": "ya pas tuyau",
+      "created_at": "2025-11-04T16:30:32.959Z"
+    }
+  ]
+}

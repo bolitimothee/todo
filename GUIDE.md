@@ -1,0 +1,40 @@
+# GUIDE de lancement rapide et script pour une courte vidéo de démonstration
+
+## Lancement local (pas à pas)
+1. Ouvrir un terminal et lancer le backend :
+```bash
+cd server
+npm install
+node index.js
+```
+Le serveur démarre sur `http://localhost:4000`. Le fichier SQLite `data.db` sera créé automatiquement.
+
+2. Ouvrir un autre terminal et lancer le frontend :
+```bash
+cd client
+npm install
+npm run dev
+```
+Ouvrir l'URL indiquée par Vite (souvent `http://localhost:5173`).
+
+3. Se connecter avec l'admin :
+- username: `admin`
+- password: `admin123`
+(Changer le mot de passe dans `server/.env` ensuite)
+
+4. Créer une société, un manager et une équipe via l'interface Admin.
+5. Se connecter avec le manager (ou créer un compte équipe) et tester la création et le suivi des tâches.
+
+## Script bref pour enregistrer une courte vidéo de démonstration (1.5 - 3 minutes)
+- Introduction (10-15s) : "Bonjour — voici TO DO LIST PRO, prototype de gestion des tâches."
+- Montrer la connexion en admin (10s).
+- Créer une société et un manager (20-30s).
+- Se déconnecter, se reconnecter en manager, créer une tâche pour l'équipe (20-30s).
+- Se connecter en équipe, marquer la tâche "en cours" puis "effectuée" et signaler un incident (30s).
+- Conclure (10s) : "C'est un prototype. Toutes les étapes et le code sont dans le repo. Pour déployer, pensez à sécuriser les secrets."
+
+## Notes techniques rapides
+- Backend : Node.js + Express + SQLite (better-sqlite3)
+- Frontend : React + Vite + react-router-dom
+- Auth : JWT (vérification côté serveur). Le client décode le token pour la redirection uniquement.
+
