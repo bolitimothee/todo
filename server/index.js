@@ -22,7 +22,8 @@ const migrateUtil = require('./migrateFromJson');
 
 const dbInitPromise = database.init().then(async () => {
     pool = database.getPool();
-    console.log('✅ Base de données MySQL initialisée');
+    const dbLabel = (process.env.DATABASE_URL || process.env.PGHOST) ? 'Postgres' : 'MySQL';
+    console.log(`✅ Base de données ${dbLabel} initialisée`);
     // migrer depuis data.json si besoin
     try{
       await migrateUtil.migrate(pool);

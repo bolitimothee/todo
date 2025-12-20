@@ -2,12 +2,18 @@
 
 ## Lancement local (pas à pas)
 1. Ouvrir un terminal et lancer le backend :
-```bash
-cd server
-npm install
+```powershell
+cd server; npm install
+# Option A: Utiliser PostgreSQL (recommandé)
+# - Configurez la variable d'environnement DATABASE_URL ou PGHOST/PGUSER/PGPASSWORD/PGDATABASE/PGPORT
+setx DATABASE_URL "postgres://user:pass@localhost:5432/todo_app"
 node index.js
+
+# Option B: Utiliser MySQL (héritage)
+# - Configurez MYSQL_HOST/ MYSQL_USER / MYSQL_PASSWORD / MYSQL_DATABASE si nécessaire
+# - Le comportement par défaut reste compatible avec MySQL si ces variables sont définies
 ```
-Le serveur démarre sur `http://localhost:4000`. Le fichier SQLite `data.db` sera créé automatiquement.
+Le serveur démarre sur `http://localhost:4000`.
 
 2. Ouvrir un autre terminal et lancer le frontend :
 ```bash
@@ -33,8 +39,7 @@ Ouvrir l'URL indiquée par Vite (souvent `http://localhost:5173`).
 - Se connecter en équipe, marquer la tâche "en cours" puis "effectuée" et signaler un incident (30s).
 - Conclure (10s) : "C'est un prototype. Toutes les étapes et le code sont dans le repo. Pour déployer, pensez à sécuriser les secrets."
 
-## Notes techniques rapides
-- Backend : Node.js + Express + SQLite (better-sqlite3)
+- Backend : Node.js + Express, compatible MySQL et PostgreSQL (via `mysql2` et `pg`)
 - Frontend : React + Vite + react-router-dom
 - Auth : JWT (vérification côté serveur). Le client décode le token pour la redirection uniquement.
 

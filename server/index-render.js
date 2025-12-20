@@ -15,6 +15,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+console.warn('⚠️  Warning: server/index-render.js is MySQL-specific and deprecated. Prefer `node server/index.js` which supports Postgres (DATABASE_URL).');
+
 // Configuration MySQL
 let pool = null;
 
