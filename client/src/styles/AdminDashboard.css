@@ -399,6 +399,21 @@
   to { opacity: 0; transform: translateX(-10px); }
 }
 
+/* Global responsive table helper */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table { min-width: 720px; }
+.table th, .table td { padding: 12px; }
+
+@media (max-width: 600px) {
+  .table { min-width: 600px; }
+  .table th, .table td { padding: 8px; font-size: 13px; }
+}
+
 /* Styles de la corbeille */
 .trash-container {
   background: #fff;

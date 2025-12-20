@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "buildCommand": "cd client && npm install && npm run build",
+  "outputDirectory": "client/dist",
+  "public": false,
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "destination": "https://RENDER_BACKEND_URL/api/$1",
+      "headers": {
+        "User-Agent": "FromVercel"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "env": {
+    "VITE_API_URL": "@render_backend_url",
+    "NODE_ENV": "production"
+  },
+  "envDirectory": ".env.production"
+}

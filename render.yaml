@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: todo-list-pro-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server/index-render.js
+    healthCheckPath: /health
+    autoDeploy: false
+    envVars:
+      - key: DATABASE_URL
+        scope: build,runtime
+        sync: false
+      - key: JWT_SECRET
+        scope: build,runtime
+        sync: false
+      - key: ADMIN_USERNAME
+        scope: build,runtime
+        sync: false
+      - key: ADMIN_PASSWORD
+        scope: build,runtime
+        sync: false
+      - key: NODE_ENV
+        value: production
+    routes:
+      - path: /
+        matchType: prefix
+
+  - type: pserv
+    name: todo-list-pro-mysql
+    plan: free
+    ipAllowList: []
+    region: frankfurt
+    databaseName: todo_app
+    username: admin

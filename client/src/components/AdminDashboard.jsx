@@ -508,29 +508,36 @@ export default function AdminDashboard({token}) {
             </select>
           )}
           <label className="muted">Validité du compte (date & heure)</label>
-          <div className="flex">
-            <input 
-              className="input" 
-              type="date" 
-              value={form.valid_until.split('T')[0] || ''}
-              onChange={e => {
-                const date = e.target.value;
-                const time = form.valid_until.split('T')[1] || '00:00';
-                setForm({...form, valid_until: date ? `${date}T${time}` : ''});
-              }}
-              placeholder="Date"
-            />
-            <input 
-              className="input" 
-              type="time" 
-              value={form.valid_until.split('T')[1] || ''}
-              onChange={e => {
-                const date = form.valid_until.split('T')[0] || '';
-                const time = e.target.value;
-                setForm({...form, valid_until: date ? `${date}T${time}` : ''});
-              }}
-              placeholder="Heure"
-            />
+          <div className="flex" style={{gap:12, flexWrap:'wrap'}}>
+            <div style={{display:'flex', flexDirection:'column', minWidth:160}}>
+              <label className="muted">Date</label>
+              <input 
+                className="input" 
+                type="date" 
+                value={form.valid_until.split('T')[0] || ''}
+                onChange={e => {
+                  const date = e.target.value;
+                  const time = form.valid_until.split('T')[1] || '00:00';
+                  setForm({...form, valid_until: date ? `${date}T${time}` : ''});
+                }}
+                aria-label="Date de validité"
+              />
+            </div>
+
+            <div style={{display:'flex', flexDirection:'column', minWidth:140}}>
+              <label className="muted">Heure</label>
+              <input 
+                className="input" 
+                type="time" 
+                value={form.valid_until.split('T')[1] || ''}
+                onChange={e => {
+                  const date = form.valid_until.split('T')[0] || '';
+                  const time = e.target.value;
+                  setForm({...form, valid_until: date ? `${date}T${time}` : ''});
+                }}
+                aria-label="Heure de validité"
+              />
+            </div>
           </div>
           <button type="submit" className="button">Créer l'utilisateur</button>
           {msg && <div className={`message ${msg.includes('créé') ? 'success' : 'error'}`}>{msg}</div>}
@@ -741,27 +748,35 @@ export default function AdminDashboard({token}) {
                     <td className="trash-actions">
                       {user.id === restoreForm.userId ? (
                         <div className="restore-form">
-                          <div className="flex">
-                            <input
-                              type="date"
-                              value={restoreForm.valid_until.split('T')[0] || ''}
-                              onChange={e => {
-                                const date = e.target.value;
-                                const time = restoreForm.valid_until.split('T')[1] || '00:00';
-                                setRestoreForm({...restoreForm, valid_until: date ? `${date}T${time}` : ''});
-                              }}
-                              required
-                              min={new Date().toISOString().slice(0, 10)}
-                            />
-                            <input
-                              type="time"
-                              value={restoreForm.valid_until.split('T')[1] || ''}
-                              onChange={e => {
-                                const date = restoreForm.valid_until.split('T')[0] || '';
-                                const time = e.target.value;
-                                setRestoreForm({...restoreForm, valid_until: date ? `${date}T${time}` : ''});
-                              }}
-                            />
+                          <div className="flex" style={{gap:8, flexWrap:'wrap'}}>
+                            <div style={{display:'flex', flexDirection:'column', minWidth:160}}>
+                              <label className="muted">Date</label>
+                              <input
+                                type="date"
+                                value={restoreForm.valid_until.split('T')[0] || ''}
+                                onChange={e => {
+                                  const date = e.target.value;
+                                  const time = restoreForm.valid_until.split('T')[1] || '00:00';
+                                  setRestoreForm({...restoreForm, valid_until: date ? `${date}T${time}` : ''});
+                                }}
+                                required
+                                min={new Date().toISOString().slice(0, 10)}
+                                aria-label="Date de validité restaurée"
+                              />
+                            </div>
+                            <div style={{display:'flex', flexDirection:'column', minWidth:140}}>
+                              <label className="muted">Heure</label>
+                              <input
+                                type="time"
+                                value={restoreForm.valid_until.split('T')[1] || ''}
+                                onChange={e => {
+                                  const date = restoreForm.valid_until.split('T')[0] || '';
+                                  const time = e.target.value;
+                                  setRestoreForm({...restoreForm, valid_until: date ? `${date}T${time}` : ''});
+                                }}
+                                aria-label="Heure de validité restaurée"
+                              />
+                            </div>
                           </div>
                           <button onClick={() => restoreUser(user.id)} className="button">
                             ✓

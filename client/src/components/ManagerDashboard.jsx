@@ -26,10 +26,11 @@ export default function ManagerDashboard({token}){
     function downloadResolvedHistory(){
       if(!resolvedHistory || Object.keys(resolvedHistory).length === 0){ alert('Aucun historique résolu à télécharger'); return; }
       let lines = [];
-      for(const team in resolvedHistory){
+        for(const team in resolvedHistory){
         lines.push(`=== Équipe : ${team} ===`);
         resolvedHistory[team].forEach(inc => {
-          lines.push(`Tâche : ${inc.task_title || '-'} | Message : ${inc.message || '-'} | Signalé le : ${inc.created_at ? new Date(inc.created_at).toLocaleString() : '-'} | Résolu le : ${inc.resolved_at ? new Date(inc.resolved_at).toLocaleString() : '-'}`);
+          const title = getTaskTitleFromRef(inc);
+          lines.push(`Tâche : ${title} | Message : ${inc.message || '-'} | Signalé le : ${inc.created_at ? new Date(inc.created_at).toLocaleString() : '-'} | Résolu le : ${inc.resolved_at ? new Date(inc.resolved_at).toLocaleString() : '-'}`);
         });
         lines.push('');
       }
@@ -45,6 +46,7 @@ export default function ManagerDashboard({token}){
     }
   const [company, setCompany] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState('');
+  const [selectedPriority, setSelectedPriority] = useState('');
   const [incidents, setIncidents] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
   const [history, setHistory] = useState([]);
@@ -110,6 +112,29 @@ export default function ManagerDashboard({token}){
     }catch(e){ console.error(e) }
   }
 
+  // Retourne l'intitulé (title) d'une tâche liée à un incident / entrée d'historique
+  function getTaskTitleFromRef(ref) {
+    if (!ref) return '-';
+    // ref peut être un incident/resolved item ou un id
+    // Si c'est un objet avec task_title
+    if (typeof ref === 'object') {
+      if (ref.task_title) return ref.task_title;
+      if (ref.title) return ref.title; // parfois l'objet d'historique contient title
+      if (ref.task && typeof ref.task === 'object' && ref.task.title) return ref.task.title;
+      const id = ref.task_id || ref.taskId || ref.task?.id || ref.task_id;
+      if (id) {
+        const found = tasks.find(t => String(t.id) === String(id));
+        if (found) return found.title;
+        return String(id);
+      }
+      return '-';
+    }
+    // si ref est une primitive (id)
+    const found = tasks.find(t => String(t.id) === String(ref));
+    if (found) return found.title;
+    return String(ref || '-');
+  }
+
   async function deleteTask(id){
     if(!confirm('Confirmer suppression de cette tâche ?')) return;
     try{
@@ -154,7 +179,12 @@ export default function ManagerDashboard({token}){
     fetchIncidents();
   }
 
-  const shownTasks = selectedTeam ? tasks.filter(t => t.team_name === selectedTeam) : tasks;
+  const shownTasks = tasks
+    .filter(t => {
+      if (selectedTeam && t.team_name !== selectedTeam) return false;
+      if (selectedPriority && t.priority !== selectedPriority) return false;
+      return true;
+    });
 
   return (
     <div className="manager-page">
@@ -167,12 +197,25 @@ export default function ManagerDashboard({token}){
           {company ? (
             <>
               <div className="mb-4"><strong>Société :</strong> {company.name}</div>
-              <div className="flex items-center">
-                <label className="muted">Filtrer par équipe : </label>
-                <select className="select" value={selectedTeam} onChange={e=>setSelectedTeam(e.target.value)}>
-                  <option value="">-- Toutes les équipes --</option>
-                  {company.teams?.map(t => <option key={t} value={t}>{t}</option>)}
-                </select>
+              <div className="flex items-center" style={{gap: '8px', flexWrap: 'wrap'}}>
+                <div style={{display:'flex', alignItems:'center', gap:8}}>
+                  <label className="muted">Filtrer par équipe : </label>
+                  <select className="select" value={selectedTeam} onChange={e=>setSelectedTeam(e.target.value)}>
+                    <option value="">-- Toutes les équipes --</option>
+                    {company.teams?.map(t => <option key={t} value={t}>{t}</option>)}
+                  </select>
+                </div>
+
+                <div style={{display:'flex', alignItems:'center', gap:8}}>
+                  <label className="muted">Filtrer par priorité : </label>
+                  <select className="select" value={selectedPriority} onChange={e=>setSelectedPriority(e.target.value)}>
+                    <option value="">-- Toutes les priorités --</option>
+                    <option value="urgentes">urgentes</option>
+                    <option value="très importantes">très importantes</option>
+                    <option value="prioritaires">prioritaires</option>
+                    <option value="faisables">faisables</option>
+                  </select>
+                </div>
               </div>
             </>
           ) : (
@@ -199,7 +242,7 @@ export default function ManagerDashboard({token}){
                       <div className="incident-meta">
                         <FaBell className="incident-icon" />
                         <div style={{display:'flex', flexDirection:'column'}}>
-                          <strong> Tâche : {i.task_title || i.task_id || '-'}</strong>
+                          <strong> Tâche : {getTaskTitleFromRef(i)}</strong>
                           <span className="incident-time">{new Date(i.created_at).toLocaleString(undefined, {year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', hour12:false})}</span>
                         </div>
                       </div>
@@ -228,9 +271,10 @@ export default function ManagerDashboard({token}){
             <div className="scroll-area">
               {(!resolvedHistory || Object.keys(resolvedHistory).length === 0) ? <div className="muted">Aucun signalement résolu</div> : (
                 Object.entries(resolvedHistory).map(([team, incidents]) => (
-                  <div key={team} style={{marginBottom:'16px'}}>
+                    <div key={team} style={{marginBottom:'16px'}}>
                     <h4 style={{marginBottom:'8px'}}>Équipe : {team}</h4>
-                    <table className="table">
+                    <div className="table-wrapper">
+                      <table className="table">
                       <thead>
                         <tr>
                           <th>Tâche</th>
@@ -242,14 +286,15 @@ export default function ManagerDashboard({token}){
                       <tbody>
                         {incidents.map(inc => (
                           <tr key={inc.id}>
-                            <td>{inc.task_title || '-'}</td>
+                            <td>{getTaskTitleFromRef(inc)}</td>
                             <td>{inc.message || '-'}</td>
                             <td>{inc.created_at ? new Date(inc.created_at).toLocaleString(undefined, {year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', hour12:false}) : '-'}</td>
                             <td>{inc.resolved_at ? new Date(inc.resolved_at).toLocaleString(undefined, {year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', hour12:false}) : '-'}</td>
                           </tr>
                         ))}
                       </tbody>
-                    </table>
+                      </table>
+                    </div>
                   </div>
                 ))
               )}
@@ -282,9 +327,10 @@ export default function ManagerDashboard({token}){
                       return acc;
                     }, {})
                   ).map(([team, items]) => (
-                    <div key={team} style={{marginBottom:'16px'}}>
+                      <div key={team} style={{marginBottom:'16px'}}>
                       <h4 style={{marginBottom:'8px'}}>Équipe : {team}</h4>
-                      <table className="table">
+                      <div className="table-wrapper">
+                        <table className="table">
                         <thead>
                           <tr>
                             <th className="th">Tâche</th>
@@ -301,7 +347,8 @@ export default function ManagerDashboard({token}){
                             </tr>
                           ))}
                         </tbody>
-                      </table>
+                        </table>
+                      </div>
                     </div>
                   ))
                 )}
@@ -333,7 +380,8 @@ export default function ManagerDashboard({token}){
             <h3 className="card-title"><FaTasks /> Tâches en cours {selectedTeam ? ` - ${selectedTeam}` : ''}</h3>
             <button onClick={fetchTasks} className="button secondary"><FaSyncAlt /> Rafraîchir</button>
           </div>
-          <table className="table">
+          <div className="table-wrapper">
+            <table className="table">
             <thead>
               <tr>
                 <th className="th">Titre</th>
@@ -366,6 +414,7 @@ export default function ManagerDashboard({token}){
               ))}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </div>

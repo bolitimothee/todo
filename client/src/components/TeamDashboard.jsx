@@ -59,7 +59,8 @@ export default function TeamDashboard({token}){
             <p>Aucune tâche en attente</p>
           </div>
         ) : (
-          <table className="table">
+          <div className="table-wrapper">
+            <table className="table">
             <thead>
               <tr>
                 <th>Titre</th>
@@ -126,7 +127,8 @@ export default function TeamDashboard({token}){
                 </tr>
               ))}
             </tbody>
-          </table>
+            </table>
+          </div>
         )}
       </div>
     </div>

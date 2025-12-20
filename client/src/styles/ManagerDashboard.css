@@ -368,6 +368,16 @@
   margin-top: 12px;
 }
 
+/* Table wrapper for horizontal scrolling on small screens */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table { min-width: 720px; }
+.table th, .table td { padding: 12px; }
+
 .th {
   background-color: #f8f9fa;
   padding: 12px;
@@ -487,6 +497,8 @@
     width: 100%;
     justify-content: flex-start;
   }
+  .table { min-width: 600px; }
+  .table th, .table td { padding: 8px; font-size: 13px; }
   .card-narrow {
     width: 100%;
   }

@@ -35,6 +35,24 @@
   flex-wrap: wrap;
 }
 
+/* Make tables horizontally scrollable on small screens */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px; /* allow horizontal scroll on small screens */
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: left;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .team-container { padding: 16px; }
@@ -46,6 +64,8 @@
   .team-container { padding: 12px; margin: 0.5rem; }
   .team-title { font-size: 1.1rem; }
   .priority-badge, .status-badge { font-size: 0.75rem; }
+  .table { min-width: 600px; }
+  .table th, .table td { padding: 8px; font-size: 13px; }
 }
 
 @media (max-width: 420px) {
