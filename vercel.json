@@ -24,7 +24,7 @@
       "dest": "/client/dist/assets/$1"
     },
     {
-      "src": "^/(.*\.html)$",
+      "src": "^/(.*\\.html)$",
       "dest": "/client/dist/$1"
     },
     {
