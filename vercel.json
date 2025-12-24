@@ -9,7 +9,7 @@
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "client/dist"
+        "distDir": "dist"
       }
     }
   ],
@@ -18,23 +18,24 @@
       "src": "/api/(.*)",
       "dest": "/api/index.js"
     },
+    { "handle": "filesystem" },
     {
       "src": "/(.*)",
-      "dest": "/client/dist/$1"
+      "dest": "/client/dist/index.html"
     }
   ],
   "env": {
-    "MYSQL_HOST": "@mysql_host",
-    "MYSQL_USER": "@mysql_user",
-    "MYSQL_PASSWORD": "@mysql_password",
-    "MYSQL_DATABASE": "@mysql_database",
-    "DATABASE_URL": "@database_url",
-    "PGHOST": "@pg_host",
-    "PGUSER": "@pg_user",
-    "PGPASSWORD": "@pg_password",
-    "PGDATABASE": "@pg_database",
-    "JWT_SECRET": "@jwt_secret",
-    "ADMIN_USERNAME": "@admin_username",
-    "ADMIN_PASSWORD": "@admin_password"
+    "MYSQL_HOST": "",
+    "MYSQL_USER": "",
+    "MYSQL_PASSWORD": "",
+    "MYSQL_DATABASE": "",
+    "DATABASE_URL": "",
+    "PGHOST": "",
+    "PGUSER": "",
+    "PGPASSWORD": "",
+    "PGDATABASE": "",
+    "JWT_SECRET": "",
+    "ADMIN_USERNAME": "",
+    "ADMIN_PASSWORD": ""
   }
 }
