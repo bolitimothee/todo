@@ -14,6 +14,29 @@
     }
   ],
 
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.js"
+    },
+    { "handle": "filesystem" },
+    {
+      "src": "^/assets/(.*)$",
+      "dest": "/client/assets/$1"
+    },
+    {
+      "src": "^/$",
+      "dest": "/client/index.html"
+    },
+    {
+      "src": "^/(.*\\.html)$",
+      "dest": "/client/$1"
+    },
+    {
+      "src": "^/(.*)$",
+      "dest": "/client/$1"
+    }
+  ],
   "env": {
     "MYSQL_HOST": "",
     "MYSQL_USER": "",
