@@ -30,7 +30,8 @@ async function initDB() {
   try {
     await database.init();
     pool = database.getPool();
-    console.log('✅ Base de données MySQL initialisée');
+    const dbLabel = (process.env.DATABASE_URL || process.env.PGHOST) ? 'Postgres' : 'MySQL';
+    console.log(`✅ Base de données ${dbLabel} initialisée`);
     const migrateUtil = require('../server/migrateFromJson');
     await migrateUtil.migrate(pool);
     await createAdminUser();
