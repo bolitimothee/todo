@@ -20,20 +20,8 @@
     },
     { "handle": "filesystem" },
     {
-      "src": "^/assets/(.*)$",
-      "dest": "/dist/assets/$1"
-    },
-    {
-      "src": "^/$",
-      "dest": "/dist/index.html"
-    },
-    {
-      "src": "^/(.*\\.html)$",
-      "dest": "/dist/$1"
-    },
-    {
       "src": "^/(.*)$",
-      "dest": "/dist/$1"
+      "dest": "/index.html"
     }
   ],
   "env": {
