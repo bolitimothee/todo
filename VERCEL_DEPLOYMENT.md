@@ -49,6 +49,15 @@ ADMIN_PASSWORD=votre-mot-de-passe-admin
 VITE_API_URL=https://votre-domaine.vercel.app
 ```
 
+> **Remarque** : Le fichier `vercel.json` du projet ne contient **pas** de valeurs sensibles intégrées (il utilise désormais des valeurs vides par défaut pour éviter les erreurs si un secret n'existe pas). Configurez vos variables d'environnement dans le **Dashboard Vercel → Settings → Environment Variables**, ou créez des secrets via la CLI :
+
+```bash
+# Exemple : créer un secret Vercel nommé "mysql_host"
+vercel secrets add mysql_host "votre-host"
+```
+
+Vous pouvez ensuite référencer ces secrets dans le dashboard ou via la CLI si vous préférez garder les valeurs chiffrées.
+
 ### Étape 4 : Déployer
 
 ```bash
