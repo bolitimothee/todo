@@ -24,16 +24,16 @@
       "dest": "/client/dist/assets/$1"
     },
     {
+      "src": "^/$",
+      "dest": "/client/dist/index.html"
+    },
+    {
       "src": "^/(.*\\.html)$",
       "dest": "/client/dist/$1"
     },
     {
       "src": "^/(.*)$",
       "dest": "/client/dist/$1"
-    },
-    {
-      "src": "^/$",
-      "dest": "/client/dist/index.html"
     }
   ],
   "env": {
